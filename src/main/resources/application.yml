@@ -1,0 +1,38 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: keka-interview-prep
+
+# Outbound HTTP client — points at local mock so the app is runnable alone.
+# In interview, change base-url to whatever external service they describe.
+external:
+  payment:
+    base-url: http://localhost:8088
+    path: /mock/payments/charge
+    connect-timeout-ms: 2000
+    read-timeout-ms: 3000
+
+# Hystrix circuit breaker defaults (tune live in interview if asked)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+      circuitBreaker:
+        requestVolumeThreshold: 5
+        errorThresholdPercentage: 50
+        sleepWindowInMilliseconds: 5000
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000
+
+logging:
+  level:
+    root: INFO
+    com.keka.interview: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

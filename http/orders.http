@@ -1,0 +1,34 @@
+### Create order (happy path — uses local mock payment)
+POST http://localhost:8088/api/v1/orders
+Content-Type: application/json
+
+{
+  "customerId": "cust-1001",
+  "amount": 499.00,
+  "currency": "INR"
+}
+
+### Get order by id (replace ORDER_ID)
+GET http://localhost:8088/api/v1/orders/ORDER_ID
+
+### List orders
+GET http://localhost:8088/api/v1/orders
+
+### Trip circuit: make mock payment always fail
+POST http://localhost:8088/mock/payments/always-fail?enabled=true
+
+### Create order while payment is down (expect FAILED + fallback message)
+POST http://localhost:8088/api/v1/orders
+Content-Type: application/json
+
+{
+  "customerId": "cust-1002",
+  "amount": 100.00,
+  "currency": "INR"
+}
+
+### Heal mock payment
+POST http://localhost:8088/mock/payments/always-fail?enabled=false
+
+### Fail only the next payment call
+POST http://localhost:8088/mock/payments/fail-next
