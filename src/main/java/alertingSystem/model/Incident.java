@@ -10,6 +10,7 @@ public class Incident {
     private String serviceId;
     private severtity severity;
     private String title;
+    private NotificationDetails notification;
 
     public String getIncidentId() {
         return incidentId;

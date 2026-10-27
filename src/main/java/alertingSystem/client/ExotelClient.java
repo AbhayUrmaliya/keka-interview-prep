@@ -1,6 +1,11 @@
 package alertingSystem.client;
 
+import alertingSystem.response.ExotelResponse;
+import org.springframework.web.client.RestTemplate;
+
 public class ExotelClient {
+
+    RestTemplate restTemplate = new RestTemplate();
 
     private  String to;
 
@@ -19,4 +24,6 @@ public class ExotelClient {
 
     private String message;
 
+    public ExotelResponse triggerCall(String incidentId, String title) {
+    }
 }

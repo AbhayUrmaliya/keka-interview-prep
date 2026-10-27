@@ -3,5 +3,7 @@ package alertingSystem.enums;
 public enum IncidentStatus {
     NOTIFIED,
     ACKNOWLEDGED,
-    RESOLVED
+    RESOLVED,
+    PENDING,
+    FAILED
 }
